@@ -1,0 +1,18 @@
+name: colab-ssh-dashboard
+image: okteto/node:12
+command: bash
+sync:
+- .:/usr/src/app
+forward:
+- 9229:9229
+- 3000:3000
+resources:
+  requests:
+    memory: "4G"
+    cpu: "2"
+  limits:
+    memory: "4G"
+    cpu: "2"
+
+persistentVolume:
+  enabled: false
