@@ -13,6 +13,5 @@ resources:
   limits:
     memory: "4G"
     cpu: "2"
-
-persistentVolume:
-  enabled: false
+volumes:
+- /usr/local/share/.cache/yarn/v6

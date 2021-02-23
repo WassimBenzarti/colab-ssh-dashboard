@@ -1,12 +1,20 @@
+import { useEffect } from "react";
+import { useRecoilState } from "recoil";
+import privateKeyAtom from "../atoms/privateKeyAtom";
+import useApiFetch from "./useApiFetch";
 
 
 export default function usePrivateKey(){
-	const [key, setKey] = useState();
-	function createPrivateKey(){
-		fetchPrivateKey()
-			.then(privateKey=>{
-				setKey(privateKey)
+	const [fetchApi] = useApiFetch()
+	const [key, setKey] = useRecoilState(privateKeyAtom);
+	function createPrivateKey () {
+		fetchApi("/createKey")
+			.then(body=>{
+				console.log("hey", body)
 			})
 	}
-	return createPrivateKey
+	useEffect(()=>{
+		localStorage.setItem("privateKey", key)
+	},[key])
+	return [key, createPrivateKey]
 }
